@@ -19,9 +19,9 @@ const server = createServer(async (request, response) => {
   }
 
   const path = request.url.split("?")[0];
-  const asset = /^\/media\/([a-z0-9-]+\.(jpg|png))$/.exec(path);
+  const asset = /^\/media-zh2580\/([a-z0-9-]+\.(jpg|png))$/.exec(path);
   const file = asset
-    ? ["media/" + asset[1], asset[2] === "jpg" ? "image/jpeg" : "image/png"]
+    ? ["media-zh2580/" + asset[1], asset[2] === "jpg" ? "image/jpeg" : "image/png"]
     : files.get(path);
   if (!file) {
     response.writeHead(404).end();
