@@ -5,25 +5,25 @@ const projects = [
   {
     key: "single", title: "单人位沙发", type: "三色系列 · 场景与详情",
     labels: ["卡其色主图", "黑色主图", "灰色主图"],
-    images: ["single-3", "single-1", "single-2"], coverSource: "./assets/single-cover.jpg", details: ["khaki", "black", "gray"]
+    images: ["single-3", "single-1", "single-2"], coverSource: "./media/single-cover.jpg", details: ["khaki", "black", "gray"]
   },
   {
     key: "u", title: "U 型沙发", type: "四色系列 · 场景、主图与详情",
     labels: ["白色场景", "黑色场景", "灰色场景", "卡其色场景", "黑色系列 · 使用场景", "黑色系列 · 面料特写", "黑色系列 · 模块组合"],
-    images: ["u-0", "u-1", "u-2", "u-3", "black-0", "black-3", "black-8"], coverSource: "./assets/u-khaki-cover.jpg", details: fourColors
+    images: ["u-0", "u-1", "u-2", "u-3", "black-0", "black-3", "black-8"], coverSource: "./media/u-khaki-cover.jpg", details: fourColors
   },
-  { key: "l", title: "L 型沙发", type: "四色系列 · 场景与详情", coverSource: "./assets/l-khaki-cover.jpg", labels: ["白色场景", "黑色场景", "灰色场景", "卡其色场景"], details: fourColors },
-  { key: "f03", title: "F03 左右版本", type: "项目素材 · 四色方案", coverSource: "./assets/f03-khaki-cover.jpg", labels: ["白色", "黑色", "灰色", "卡其色"], details: fourColors },
-  { key: "suite", title: "儿童模块沙发", type: "商品主图与详情", coverSource: "./assets/suite-cover.jpg", labels: ["组合主图", "另一种组合"], details: ["all"] },
-  { key: "main", title: "智能坐便器", type: "商品主图与功能展示", coverSource: "./assets/main-cover.jpg", labels: ["商品主图"], details: ["all"] },
-  { key: "gold", title: "金色淋浴房", type: "场景与产品细节", coverSource: "./assets/gold-1.jpg", labels: ["正面场景", "侧面场景"], details: ["all"] },
+  { key: "l", title: "L 型沙发", type: "四色系列 · 场景与详情", coverSource: "./media/l-khaki-cover.jpg", labels: ["白色场景", "黑色场景", "灰色场景", "卡其色场景"], details: fourColors },
+  { key: "f03", title: "F03 左右版本", type: "项目素材 · 四色方案", coverSource: "./media/f03-khaki-cover.jpg", labels: ["白色", "黑色", "灰色", "卡其色"], details: fourColors },
+  { key: "suite", title: "儿童模块沙发", type: "商品主图与详情", coverSource: "./media/suite-cover.jpg", labels: ["组合主图", "另一种组合"], details: ["all"] },
+  { key: "main", title: "智能坐便器", type: "商品主图与功能展示", coverSource: "./media/main-cover.jpg", labels: ["商品主图"], details: ["all"] },
+  { key: "gold", title: "金色淋浴房", type: "场景与产品细节", coverSource: "./media/gold-1.jpg", labels: ["正面场景", "侧面场景"], details: ["all"] },
 ];
 
 const childBed = {
   key: "zcool-wood",
   title: "实木板式渲染",
   type: "儿童床与收纳家具",
-  coverSource: "./assets/zcool-wood-2.jpg",
+  coverSource: "./media/zcool-wood-2.jpg",
   labels: [
     "拱形收纳架", "收纳组合正面", "收纳组合全景", "屋形儿童床",
     "儿童床与收纳架", "儿童低床正面", "儿童低床与活动区", "儿童低床侧面",
@@ -34,11 +34,11 @@ const childBed = {
 };
 const archiveProjects = [
   childBed,
-  { key: "zcool-panel", title: "板式", type: "餐边柜、餐桌与收纳系列", coverSource: "./assets/zcool-panel-15.jpg", mainSheets: ["all"] },
+  { key: "zcool-panel", title: "板式", type: "餐边柜、餐桌与收纳系列", coverSource: "./media/zcool-panel-15.jpg", mainSheets: ["all"] },
   { key: "zcool-sofa", title: "沙发渲染", type: "沙发场景与功能展示", mainSheets: ["all"] },
 ];
 
-const development = { title: "沙发产品开发记录", type: "结构、面料与场景探索", labels: ["开发过程截图"], source: "./assets/development.png" };
+const development = { title: "沙发产品开发记录", type: "结构、面料与场景探索", labels: ["开发过程截图"], source: "./media/development.png" };
 const f03l = {
   key: "f03l", title: "F03L 沙发", type: "四色系列 · 主图与详情",
   labels: ["白色场景", "卡其色场景", "灰色场景", "黑色场景", "灯芯绒细节", "产品细节", "产品规格"], mainSheets: fourColors, details: fourColors
@@ -50,9 +50,7 @@ const f03Footrest = {
 const dialog = document.querySelector("#gallery");
 const title = document.querySelector("#gallery-title");
 const caption = document.querySelector("#gallery-caption");
-const image = document.querySelector("#gallery-image");
 const imageFrame = document.querySelector("#gallery-image-frame");
-const download = document.querySelector("#download-detail");
 const modes = document.querySelector("#gallery-modes");
 const modeButtons = [...modes.querySelectorAll("button")];
 const variant = document.querySelector("#gallery-variant");
@@ -66,7 +64,7 @@ let selectedIndex;
 
 function imageSource(project, index) {
   const filename = project.images?.[index] ?? project.key + "-" + index;
-  return project.source ?? "./assets/" + filename + ".jpg";
+  return project.source ?? "./media/" + filename + ".jpg";
 }
 
 function openGallery(project) {
@@ -78,7 +76,7 @@ function openGallery(project) {
   selectedImages = sheets.flatMap(([mode, name, colors]) => colors.map((color) => ({
     label: detailLabels[color] + name,
     color,
-    src: "./assets/" + project.key + "-" + mode + "-" + color + ".jpg",
+    src: "./media/" + project.key + "-" + mode + "-" + color + ".jpg",
     mode,
   })));
   const hasLongImages = selectedImages.length > 0;
@@ -119,13 +117,22 @@ function showImage(index) {
   imageFrame.toggleAttribute("data-long", isLong);
   imageFrame.setAttribute("aria-label", isLong ? "作品长图，可上下滚动" : "作品图片");
   dialog.scrollTop = 0;
-  image.src = entry.src;
-  image.alt = selectedProject.title + " · " + entry.label;
-  download.hidden = !isLong;
-  if (isLong) {
-    download.href = entry.src;
-    download.download = selectedProject.title + "-" + entry.label + ".jpg";
-  }
+  const filename = entry.src.split("/").at(-1);
+  const parts = isLong ? sheetParts[filename] : undefined;
+  const frames = parts ?? [[filename]];
+  imageFrame.replaceChildren(...frames.map(([part, width, height], partIndex) => {
+    const photo = document.createElement("img");
+    photo.className = "gallery-image";
+    photo.src = parts ? "./media/" + part : entry.src;
+    photo.alt = partIndex === 0 ? selectedProject.title + " · " + entry.label : "";
+    photo.loading = partIndex === 0 ? "eager" : "lazy";
+    photo.decoding = "async";
+    if (parts) {
+      photo.width = width;
+      photo.height = height;
+    }
+    return photo;
+  }));
   const colorIndexes = selectedImages.map((item, index) => item.mode === entry.mode ? index : -1).filter((index) => index !== -1);
   variants.hidden = !isLong || colorIndexes.length < 2;
   if (!variants.hidden) {
@@ -197,3 +204,15 @@ dialog.addEventListener("keydown", (event) => {
   event.preventDefault();
   showImage(selectedIndex + (event.key === "ArrowLeft" ? -1 : 1));
 });
+
+for (const preview of document.querySelectorAll("[data-preview]")) {
+  preview.addEventListener("click", () => {
+    const label = preview.closest("figure").querySelector("figcaption").textContent;
+    openGallery({ title: label, type: "AI 项目", labels: ["项目截图"], source: preview.dataset.preview });
+  });
+}
+for (const eventType of ["contextmenu", "dragstart"]) {
+  document.addEventListener(eventType, (event) => {
+    if (event.target instanceof HTMLImageElement) event.preventDefault();
+  });
+}

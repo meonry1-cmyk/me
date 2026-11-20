@@ -6,6 +6,7 @@ const files = new Map([
   ["/index.html", ["index.html", "text/html"]],
   ["/style.css", ["style.css", "text/css"]],
   ["/portfolio.js", ["portfolio.js", "text/javascript"]],
+  ["/sheet-parts.js", ["sheet-parts.js", "text/javascript"]],
 ]);
 
 const port = Number(process.env.PORTFOLIO_PORT || 4187);
@@ -18,9 +19,9 @@ const server = createServer(async (request, response) => {
   }
 
   const path = request.url.split("?")[0];
-  const asset = /^\/assets\/([a-z0-9-]+\.(jpg|png))$/.exec(path);
+  const asset = /^\/media\/([a-z0-9-]+\.(jpg|png))$/.exec(path);
   const file = asset
-    ? ["assets/" + asset[1], asset[2] === "jpg" ? "image/jpeg" : "image/png"]
+    ? ["media/" + asset[1], asset[2] === "jpg" ? "image/jpeg" : "image/png"]
     : files.get(path);
   if (!file) {
     response.writeHead(404).end();
