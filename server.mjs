@@ -29,7 +29,7 @@ const server = createServer(async (request, response) => {
 
   const [name, type] = file;
   try {
-    const content = await readFile(new URL("./public/" + name, import.meta.url));
+    const content = await readFile(new URL("./docs/" + name, import.meta.url));
     response.writeHead(200, {
       "Content-Type": type.startsWith("image/") ? type : type + "; charset=utf-8",
       "Content-Length": content.length,
